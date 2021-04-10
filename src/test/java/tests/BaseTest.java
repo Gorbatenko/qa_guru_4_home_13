@@ -2,51 +2,56 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import config.EnvironmentConfig;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static com.codeborne.selenide.AssertionMode.SOFT;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
+import static com.codeborne.selenide.Selenide.open;
 import static helpers.AttachmentsHelper.*;
+import static helpers.ConfigHelper.*;
+import static io.qameta.allure.Allure.step;
 
 public class BaseTest {
-    private EnvironmentConfig envConfig = ConfigFactory.create(EnvironmentConfig.class);
-
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         SelenideLogger.addListener("allure", new AllureSelenide());
-        Configuration.browserSize = envConfig.getBrowserSize();
-        Configuration.browser = envConfig.getBrowser();
+        Configuration.browserSize = getBrowserSize();
+        Configuration.browser = getBrowser();
+        Configuration.baseUrl = getBaseUrl();
         Configuration.assertionMode = SOFT;
-        Configuration.baseUrl = envConfig.getBaseUrl();
 
-        if (envConfig.getPlatform().equals("selenoid")) {
+        if (getPlatform().equals("selenoid")) {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", true);
             Configuration.browserCapabilities = capabilities;
-            Configuration.remote = String.format(
-                    envConfig.getSelenoidRemote(),
-                    envConfig.getSelenoidLogin(),
-                    envConfig.getSelenoidPassword());
+            Configuration.remote = getWebRemoteDriver();
         }
 
         setEnvironmentAllure("task", System.getProperty("TASK", "test"));
-        setEnvironmentAllure("browser", envConfig.getBrowser());
-        setEnvironmentAllure("platform", envConfig.getPlatform());
+        setEnvironmentAllure("browser", getBrowser());
+        setEnvironmentAllure("platform", getPlatform());
+    }
+
+    @BeforeEach
+    void openBaseUrl() {
+        step("Переход на страницу " + getBaseUrl(), () -> {
+            open(getBaseUrl());
+        });
     }
 
     @AfterEach
-    void afterEach() {
-        attachPageSource();
+    void addAttachments() {
+        String sessionId = getSessionId();
         attachScreenshot("Last screenshot");
-        if (envConfig.getPlatform().equals("selenoid")) {
-            attachVideo();
-            closeWebDriver();
+        attachPageSource();
+        closeWebDriver();
+        if (getPlatform().equals("selenoid")) {
+            attachVideo(sessionId);
         }
     }
 }

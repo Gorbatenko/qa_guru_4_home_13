@@ -1,20 +1,24 @@
 package tests;
 
-import com.codeborne.selenide.*;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.junit5.SoftAssertsExtension;
 import com.github.javafaker.Faker;
-import config.EnvironmentConfig;
-import io.qameta.allure.*;
-import org.aeonbits.owner.ConfigFactory;
-import org.junit.jupiter.api.*;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.Story;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.selenide.CollectionCondition.*;
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.CollectionCondition.texts;
+import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
@@ -23,16 +27,9 @@ import static io.qameta.allure.SeverityLevel.NORMAL;
 @ExtendWith({SoftAssertsExtension.class})
 public class QaGuruTest extends BaseTest {
     private final Faker faker = new Faker();
-    private final EnvironmentConfig envConfig = ConfigFactory.create(EnvironmentConfig.class);
-
-    @BeforeEach
-    void openBaseUrl() {
-        step("Переход на страницу " + envConfig.getBaseUrl(), () -> {
-            open("/");
-        });
-    }
 
     @Test
+    @Tag("mainPage")
     @Severity(NORMAL)
     @Owner("GorbatenkoVA")
     @Story("Проверка общей информации")
@@ -58,6 +55,7 @@ public class QaGuruTest extends BaseTest {
     }
 
     @Test
+    @Tag("mainPage")
     @Severity(NORMAL)
     @Owner("GorbatenkoVA")
     @Story("Проверка общей информации")
@@ -82,6 +80,7 @@ public class QaGuruTest extends BaseTest {
     }
 
     @Test
+    @Tag("mainPage")
     @Severity(CRITICAL)
     @Owner("GorbatenkoVA")
     @Story("Проверка записи на курс")
@@ -109,6 +108,7 @@ public class QaGuruTest extends BaseTest {
     }
 
     @Test
+    @Tag("mainPage")
     @Severity(CRITICAL)
     @Owner("GorbatenkoVA")
     @Story("Проверка записи на курс")
@@ -136,6 +136,7 @@ public class QaGuruTest extends BaseTest {
     }
 
     @Test
+    @Tag("mainPage")
     @Severity(CRITICAL)
     @Owner("GorbatenkoVA")
     @Story("Проверка записи на курс")
@@ -163,6 +164,7 @@ public class QaGuruTest extends BaseTest {
     }
 
     @Test
+    @Tag("mainPage")
     @Severity(NORMAL)
     @Owner("GorbatenkoVA")
     @Story("Проверка контактов")
@@ -180,6 +182,7 @@ public class QaGuruTest extends BaseTest {
     }
 
     @Test
+    @Tag("mainPage")
     @Severity(CRITICAL)
     @Owner("GorbatenkoVA")
     @Story("Проверка общей информации")

@@ -2,9 +2,10 @@ package config;
 
 import org.aeonbits.owner.Config;
 
-@Config.Sources({"classpath:${platform}.properties",
-                 "classpath:environment.properties"})
 @Config.LoadPolicy(Config.LoadType.MERGE)
+@Config.Sources({"classpath:${platform}.properties",
+                 "classpath:env.properties",
+                 "system:properties"})
 public interface EnvironmentConfig extends Config {
 
     @Key("browser.size")

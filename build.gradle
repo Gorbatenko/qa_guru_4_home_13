@@ -27,10 +27,11 @@ dependencies {
             "io.qameta.allure:allure-java-commons:$allureVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion",
-            "org.junit.jupiter:junit-jupiter-engine:$junitVersion",
             "com.github.javafaker:javafaker:$javafakerVersion",
-            'org.aeonbits.owner:owner:1.0.12'
+            'org.aeonbits.owner:owner:1.0.12',
+            'org.aspectj:aspectjweaver:1.9.6'
     )
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
 
 compileTestJava {
@@ -43,9 +44,20 @@ tasks.withType(Test) {
 
 test {
     useJUnitPlatform()
-    systemProperties(System.getProperties())
     reports {
         junitXml.enabled = false
         html.enabled = true
+    }
+}
+
+task main_page_test(type: Test) {
+    useJUnitPlatform {
+        includeTags 'mainPage'
+    }
+}
+
+task login_page_test(type: Test) {
+    useJUnitPlatform {
+        includeTags 'loginPage'
     }
 }
