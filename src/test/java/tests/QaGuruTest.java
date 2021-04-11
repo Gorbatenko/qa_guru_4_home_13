@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.junit5.SoftAssertsExtension;
 import com.github.javafaker.Faker;
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
@@ -27,6 +28,8 @@ import static io.qameta.allure.SeverityLevel.NORMAL;
 @ExtendWith({SoftAssertsExtension.class})
 public class QaGuruTest extends BaseTest {
     private final Faker faker = new Faker();
+
+    private String expectedStartNextCohortMonth;
 
     @Test
     @Tag("mainPage")
@@ -202,4 +205,25 @@ public class QaGuruTest extends BaseTest {
 
     }
 
+    @Test
+    @Tag("mainPage")
+    @AllureId("2230")
+    @Severity(CRITICAL)
+    @Owner("GorbatenkoVA")
+    @Feature("Проверка общей информации")
+    @DisplayName("В описании скидки актуальный месяц.")
+    void testCheckMonthAtSale() {
+        step("В форме записи на вводное занятие узнать месяц", () -> {
+            String textHeading = $("#last_form h2").scrollTo().text();
+            sleep(500);
+            expectedStartNextCohortMonth = textHeading.substring(textHeading.lastIndexOf(" ") + 1);
+        });
+        step("Раскрыть список 'Скидки есть?' в часто задаваемых вопросах.", () -> {
+            $(byText("Скидки есть?")).click();
+        });
+        step("Проверить, что для скидки нужно оплатить до '" + expectedStartNextCohortMonth + "'", () -> {
+            $(byText("Скидки есть, при оплате до"))
+                    .shouldHave(text(expectedStartNextCohortMonth));
+        });
+    }
 }

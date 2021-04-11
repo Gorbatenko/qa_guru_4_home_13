@@ -39,7 +39,7 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
 
-compileTestJava {
+tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
