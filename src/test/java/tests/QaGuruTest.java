@@ -22,8 +22,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
-import static io.qameta.allure.SeverityLevel.CRITICAL;
-import static io.qameta.allure.SeverityLevel.NORMAL;
+import static io.qameta.allure.SeverityLevel.*;
 
 @ExtendWith({SoftAssertsExtension.class})
 public class QaGuruTest extends BaseTest {
@@ -208,7 +207,7 @@ public class QaGuruTest extends BaseTest {
     @Test
     @Tag("mainPage")
     @AllureId("2230")
-    @Severity(CRITICAL)
+    @Severity(TRIVIAL)
     @Owner("GorbatenkoVA")
     @Feature("Проверка общей информации")
     @DisplayName("В описании скидки актуальный месяц.")
