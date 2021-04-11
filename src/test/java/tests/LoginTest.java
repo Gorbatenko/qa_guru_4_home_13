@@ -2,6 +2,7 @@ package tests;
 
 import com.codeborne.selenide.junit5.SoftAssertsExtension;
 import com.github.javafaker.Faker;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
@@ -28,7 +29,7 @@ public class LoginTest extends BaseTest{
     @Tag("loginPage")
     @Owner("GorbatenkoVA")
     @Severity(CRITICAL)
-    @Story("Проверка авторизационной формы")
+    @Feature("Проверка авторизационной формы")
     @DisplayName("Логин с неправильной почтой не пропустит в личный кабинет.")
     void testThatUserWithErrorEmailNotLogin() {
         String randomEmail = faker.internet().emailAddress();
@@ -51,7 +52,7 @@ public class LoginTest extends BaseTest{
     @Tag("loginPage")
     @Owner("GorbatenkoVA")
     @Severity(CRITICAL)
-    @Story("Проверка авторизационной формы")
+    @Feature("Проверка авторизационной формы")
     @DisplayName("Логин с неправильным паролем не пропустит в личный кабинет.")
     void testThatUserWithErrorPasswordNotLogin() {
         String studentEmail = getStudentEmail();
@@ -74,7 +75,7 @@ public class LoginTest extends BaseTest{
     @Tag("loginPage")
     @Owner("GorbatenkoVA")
     @Severity(CRITICAL)
-    @Story("Проверка авторизационной формы")
+    @Feature("Проверка авторизационной формы")
     @DisplayName("Логин с валидными данными ведёт в личный кабинет.")
     void testCheckThatStudentCanLogin() {
         String studentEmail = getStudentEmail();
@@ -91,7 +92,7 @@ public class LoginTest extends BaseTest{
     @Tag("loginPage")
     @Owner("GorbatenkoVA")
     @Severity(MINOR)
-    @Story("Проверка редиректа главной страницы")
+    @Feature("Проверка редиректа главной страницы")
     @DisplayName("Авторизованного студента переводит в личный кабинет с главной страницы.")
     void testCheckLoginedStudentRedirectToPersonalAccountFromMainPage() {
         String studentEmail = getStudentEmail();
@@ -112,7 +113,7 @@ public class LoginTest extends BaseTest{
     @Tag("loginPage")
     @Owner("GorbatenkoVA")
     @Severity(MINOR)
-    @Story("Проверка редиректа главной страницы")
+    @Feature("Проверка редиректа главной страницы")
     @DisplayName("После выхода из личного кабинета главная страница доступна.")
     void testCheckLogoutStudentCanUseMainPage() {
         String studentEmail = getStudentEmail();

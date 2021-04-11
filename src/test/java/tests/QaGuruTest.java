@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.junit5.SoftAssertsExtension;
 import com.github.javafaker.Faker;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
@@ -32,7 +33,7 @@ public class QaGuruTest extends BaseTest {
     @Tag("mainPage")
     @Severity(NORMAL)
     @Owner("GorbatenkoVA")
-    @Story("Проверка общей информации")
+    @Feature("Проверка общей информации")
     @DisplayName("Наличие всех заявленных инструментов в программе обучения")
     void testCheckAllInstrumentsInEducationProgram() {
         List<String> skills = new ArrayList<>();
@@ -58,7 +59,7 @@ public class QaGuruTest extends BaseTest {
     @Tag("mainPage")
     @Severity(NORMAL)
     @Owner("GorbatenkoVA")
-    @Story("Проверка общей информации")
+    @Feature("Проверка общей информации")
     @DisplayName("Наличие всех заявленных преподавателей в программе обучения")
     void testCheckAllLectorsInEducationProgram() {
         List<String> trainers = new ArrayList<>();
@@ -83,7 +84,7 @@ public class QaGuruTest extends BaseTest {
     @Tag("mainPage")
     @Severity(CRITICAL)
     @Owner("GorbatenkoVA")
-    @Story("Проверка записи на курс")
+    @Feature("Проверка записи на курс")
     @DisplayName("Кнопка 'Записаться' не пропустит без почты.")
     void testUserCantSendApplicationForParticipationWithoutEmail() {
         String firstName = faker.name().firstName();
@@ -111,7 +112,7 @@ public class QaGuruTest extends BaseTest {
     @Tag("mainPage")
     @Severity(CRITICAL)
     @Owner("GorbatenkoVA")
-    @Story("Проверка записи на курс")
+    @Feature("Проверка записи на курс")
     @DisplayName("Кнопка 'Записаться' не пропустит без имени.")
     void testUserCantSendApplicationForParticipationWithoutName() {
         String emailAddress = faker.internet().emailAddress();
@@ -139,7 +140,7 @@ public class QaGuruTest extends BaseTest {
     @Tag("mainPage")
     @Severity(CRITICAL)
     @Owner("GorbatenkoVA")
-    @Story("Проверка записи на курс")
+    @Feature("Проверка записи на курс")
     @DisplayName("Кнопка 'Записаться' не пропустит без телефона.")
     void testUserCantSendApplicationForParticipationWithoutPhone() {
         String emailAddress = faker.internet().emailAddress();
@@ -167,7 +168,7 @@ public class QaGuruTest extends BaseTest {
     @Tag("mainPage")
     @Severity(NORMAL)
     @Owner("GorbatenkoVA")
-    @Story("Проверка контактов")
+    @Feature("Проверка контактов")
     @DisplayName("Ссылка в разделе 'Как оплатить' ведёт в телеграм.")
     void testCheckTelegramLinkOnPaymentQuestions() {
         String expectedLink = "https://t.me/cnokoino";
@@ -185,7 +186,7 @@ public class QaGuruTest extends BaseTest {
     @Tag("mainPage")
     @Severity(CRITICAL)
     @Owner("GorbatenkoVA")
-    @Story("Проверка общей информации")
+    @Feature("Проверка общей информации")
     @DisplayName("Цена обучения для разных уровней актуальна.")
     void testCheckPrice() {
         step("Переход к прайсам", () -> {
