@@ -13,7 +13,7 @@
 
 Стэк технологий
 -------------
-Java, Gradle, Junit5, Selenide, Allure Reports, Jenkins, Selenoid, Telegram Bot, Owner.
+Java, Gradle, Junit5, Selenide, Allure Reports, Allure TestOps, Jenkins, Selenoid, Telegram Bot, Owner.
 
 [Jenkins-сборка](https://jenkins.autotests.cloud/job/C04-G14-Vitaliy-qa_guru_4_11_SpeedTesting/)
 -------------
@@ -22,7 +22,12 @@ Java, Gradle, Junit5, Selenide, Allure Reports, Jenkins, Selenoid, Telegram Bot,
 
 ![](src/test/resources/readme/jenkins.png)
 
-> Общий дашборд прогона тестов.
+> Тест-менеджер allure-TestOps.
+
+![](src/test/resources/readme/allureTestOps.png)
+![](src/test/resources/readme/allureTestOpsLaunchers.png)
+
+> Общий allure-дашборд прогона тестов.
 
 ![](src/test/resources/readme/allure.png)
 
